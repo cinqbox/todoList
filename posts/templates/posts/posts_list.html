@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block page_title %}TaskList{% endblock %}
+{% block title %}post{% endblock %}
+
+{% block content %}
+    <h4 class="mt-4 border-bottom">タスクの一覧</h4>
+    {#    <a href="{% url 'cms:book_add' %}" class="btn"#}
+    <table class="table table-striped table-bordered">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">タスク名</th>
+            <th scope="col">締め切り</th>
+            <th scope="col">重要性</th>
+            <th scope="col">緊急性</th>
+            <th scope="col">詳細</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for post in posts_list %}
+            <tr>
+                <th scope="row">{{ post.id }}</th>
+                <td>{{ post.task }}</td>
+                <td>{{ post.deadline }}</td>
+                <td>{{ post.importance }}</td>
+                <td>{{ post.urgency }}</td>
+                <td><a href="{% url 'posts:detail' post.pk %}">詳細</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock content %}
+

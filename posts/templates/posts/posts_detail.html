@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block page_title %}TaskList{% endblock %}
+{% block title %}post{% endblock %}
+
+{% block content %}
+    <h4 class="mt-4 border-bottom">タスク詳細</h4>
+    <table class="table table-striped table-bordered">
+        <thead>
+        <tr>
+            <th scope="col">タスク名</th>
+            <th scope="col">タスク詳細</th>
+            <th scope="col">締め切り</th>
+            <th scope="col">重要性</th>
+            <th scope="col">緊急性</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>{{ posts.task }}</td>
+            <td>{{ posts.task_text }}</td>
+            <td>{{ posts.deadline }}</td>
+            <td>{{ posts.importance }}</td>
+            <td>{{ posts.urgency }}</td>
+        </tr>
+        </tbody>
+    </table>
+{% endblock content %}

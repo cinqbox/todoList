@@ -1,21 +1,12 @@
 from django.shortcuts import render
-from django.views.generic import View
+from django.views.generic import View, UpdateView, ListView, DetailView, CreateView
 from .form import WriteForm
 from django.shortcuts import redirect
 from .models import Posts
+from django.urls import reverse
 
 
 # Create your views here.
-
-class IndexView(View):
-    def get(self, request, *args, **kwargs):
-        # Postsテーブルのデータを全て取得
-        queryset = Posts.objects.all().order_by('-created_at')
-        # 値付きでpost.htmlに飛ぶ
-        return render(request, 'posts/post.html', {'posts': queryset})
-
-
-index = IndexView.as_view()
 
 
 class WriteView(View):
@@ -33,3 +24,37 @@ class WriteView(View):
 
 
 write = WriteView.as_view()
+
+
+class TaskList(ListView):
+    template_name = 'posts/posts_list.html'
+    queryset = Posts.objects.order_by('-deadline')
+    model = Posts
+
+
+index = TaskList.as_view()
+
+
+class TaskDetail(DetailView):
+    model = Posts
+
+
+detail = TaskDetail.as_view()
+
+
+class Create(CreateView):
+    model = Posts
+    fields = ['task', 'task_text', 'deadline', 'importance', 'urgency']
+
+    def get_success_url(self):
+        return reverse('posts:index', kwargs={'pk': self.object.pk})
+
+# class IndexView(View):
+#     def get(self, request, *args, **kwargs):
+#         # Postsテーブルのデータを全て取得
+#         queryset = Posts.objects.all().order_by('id')
+#         # 値付きでpost.htmlに飛ぶ
+#         return render(request, 'posts/posts_list.html', {'posts': queryset})
+#
+#
+# index = IndexView.as_view()

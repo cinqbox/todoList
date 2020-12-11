@@ -6,4 +6,5 @@ class WriteForm(forms.ModelForm):
     class Meta:
         # モデルを指定
         model = Posts
-        fields = ('task',)
+        fields = ('task', 'task_text', 'deadline', 'importance', 'urgency')
+        widgets = {'deadline': forms.SelectDateWidget}
