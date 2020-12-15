@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block page_title %}TaskList{% endblock %}
+{% block title %}post{% endblock %}
+
+{% block content %}
+    <h4 class="mt-4 border-bottom">タスクの削除</h4>
+    <form method="post" action="{% url 'posts:delete' posts.pk %}">
+        {% csrf_token %}
+        <p>タスク名：{{ posts.task }}を削除しますか？</p>
+        <button type="submit" class="button">削除</button>
+    </form>
+{% endblock %}

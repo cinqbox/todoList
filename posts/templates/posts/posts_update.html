@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block page_title %}Update{% endblock %}
+{% block title %}Update{% endblock %}
+
+{% block content %}
+    <form method="post" action="{% url 'posts:update' posts.pk %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="button">編集</button>
+    </form>
+{% endblock %}

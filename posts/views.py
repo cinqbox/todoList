@@ -1,53 +1,60 @@
-from django.shortcuts import render
-from django.views.generic import View, UpdateView, ListView, DetailView, CreateView
-from .form import WriteForm
-from django.shortcuts import redirect
+from django.http import Http404
+from django.views.generic import DeleteView, UpdateView, ListView, DetailView, CreateView
+from django import forms
+from django.shortcuts import get_object_or_404, redirect
 from .models import Posts
-from django.urls import reverse
-
-
-# Create your views here.
-
-
-class WriteView(View):
-    def get(self, request, *args, **kwargs):
-        return render(request, 'posts/write.html', {'form': WriteForm})
-
-    # メゾットがpostの場合にデータベースに保存
-    def post(self, request, *args, **kwargs):
-        # formに書いた内容を格納する
-        form = WriteForm(request.POST)
-        # 保存する前に一回取り出す
-        post = form.save(commit=False)
-        post.save()
-        return redirect('posts:index')
-
-
-write = WriteView.as_view()
+from .form import WriteForm
+from django.urls import reverse, reverse_lazy
 
 
 class TaskList(ListView):
     template_name = 'posts/posts_list.html'
     queryset = Posts.objects.order_by('-deadline')
     model = Posts
-
-
-index = TaskList.as_view()
+    paginate_by = 5
 
 
 class TaskDetail(DetailView):
     model = Posts
 
 
-detail = TaskDetail.as_view()
-
-
 class Create(CreateView):
     model = Posts
-    fields = ['task', 'task_text', 'deadline', 'importance', 'urgency']
+    template_name = 'posts/write.html'
+    form_class = WriteForm
 
     def get_success_url(self):
-        return reverse('posts:index', kwargs={'pk': self.object.pk})
+        return reverse('posts:index')
+
+
+class Update(UpdateView):
+    template_name = 'posts/posts_update.html'
+    model = Posts
+    form_class = WriteForm
+
+    def get_success_url(self):
+        return reverse('posts:index')
+
+
+class Delete(DeleteView):
+    template_name = 'posts/posts_delete.html'
+    model = Posts
+    success_url = reverse_lazy('posts:index')
+
+
+def AllDelete(request):
+    try:
+        Posts.objects.all().delete()
+    except Posts.DoesNotExist:
+        raise Http404("Posts does not exist")
+    return redirect('posts:index')
+
+
+write = Create.as_view()
+detail = TaskDetail.as_view()
+index = TaskList.as_view()
+update = Update.as_view()
+delete = Delete.as_view()
 
 # class IndexView(View):
 #     def get(self, request, *args, **kwargs):
@@ -58,3 +65,16 @@ class Create(CreateView):
 #
 #
 # index = IndexView.as_view()
+
+# class WriteView(View):
+#     def get(self, request, *args, **kwargs):
+#         return render(request, 'posts/write.html', {'form': WriteForm})
+#
+#     # メゾットがpostの場合にデータベースに保存
+#     def post(self, request, *args, **kwargs):
+#         # formに書いた内容を格納する
+#         form = WriteForm(request.POST)
+#         # 保存する前に一回取り出す
+#         post = form.save(commit=False)
+#         post.save()
+#         return redirect('posts:index')

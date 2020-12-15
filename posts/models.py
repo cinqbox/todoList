@@ -17,4 +17,4 @@ class Posts(models.Model):
     urgency = models.BooleanField(verbose_name='緊急', default=True)
 
     def __str__(self):
-        return self.task, self.deadline
+        return str(self.task)
