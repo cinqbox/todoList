@@ -5,6 +5,7 @@ from django.shortcuts import get_object_or_404, redirect
 from .models import Posts
 from .form import WriteForm
 from django.urls import reverse, reverse_lazy
+from django.views.decorators.http import require_POST
 
 
 class TaskList(ListView):
@@ -42,6 +43,7 @@ class Delete(DeleteView):
     success_url = reverse_lazy('posts:index')
 
 
+@require_POST
 def AllDelete(request):
     try:
         Posts.objects.all().delete()

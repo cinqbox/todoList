@@ -7,4 +7,4 @@ class WriteForm(forms.ModelForm):
         # モデルを指定
         model = Posts
         fields = ('task', 'task_text', 'deadline', 'importance', 'urgency')
-        widgets = {'deadline': forms.SelectDateWidget}
+        widgets = {'task_text': forms.Textarea, 'deadline': forms.SelectDateWidget}

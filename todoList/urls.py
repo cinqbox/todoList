@@ -20,5 +20,6 @@ from django.urls import path, include
 # pathはどのURLを指定しているか、それがどのファイルなのか
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('posts.urls'))
+    path('', include('posts.urls')),
+    path('api/', include('api.urls'))
 ]
