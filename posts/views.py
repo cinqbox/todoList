@@ -6,6 +6,7 @@ from .models import Posts
 from .form import WriteForm
 from django.urls import reverse, reverse_lazy
 from django.views.decorators.http import require_POST
+from django.db.models import Q
 
 
 class TaskList(ListView):
@@ -13,6 +14,17 @@ class TaskList(ListView):
     queryset = Posts.objects.order_by('-deadline')
     model = Posts
     paginate_by = 5
+
+    def get_queryset(self):
+        q_word = self.request.GET.get('query')
+
+        if q_word:
+            object_list = Posts.objects.filter(
+                Q(task__icontains=q_word) | Q(task_text__icontains=q_word)
+            )
+        else:
+            object_list = Posts.objects.all()
+        return object_list
 
 
 class TaskDetail(DetailView):
