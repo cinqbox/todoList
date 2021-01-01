@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}タスク図解{% endblock %}
+{% block extrahead %}
+    <link href="{% static 'figure.css' %}" rel="stylesheet">
+{% endblock %}
+
+
+{% block content %}
+    <h4 class="mt-4 border-bottom">タスク図解</h4>
+    <table class="table table-bordered">
+        <tr>
+            <td>
+                <div class="task">
+                    <table class="table" style="border-collapse: collapse;">
+                        <thead class="thead-light">
+                        <tr>
+                            <th style="width: auto">誰かに任せる</th>
+                        </tr>
+                        </thead>
+                        <tbody style="display: block; overflow-y: scroll; height: 200px">
+                        {% for post in figure_list %}
+                            {% if post.importance == False and post.urgency == True %}
+                                <tr>
+                                    <td style="width: auto; border: none">{{ post.task }}</td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </td>
+            <td>
+                <table class="table" style="border-collapse: collapse;">
+                    <thead class="thead-light">
+                    <tr>
+                        <th style="width: auto">誰かに任せる</th>
+                    </tr>
+                    </thead>
+                    <tbody style="display: block; overflow-y: scroll; height: 200px">
+                    {% for post in figure_list %}
+                        {% if post.importance == True and post.urgency == True %}
+                            <tr>
+                                <td style="width: auto; border: none">{{ post.task }}</td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <table class="table" style="border-collapse: collapse;">
+                    <thead class="thead-light">
+                    <tr>
+                        <th style="width: auto">誰かに任せる</th>
+                    </tr>
+                    </thead>
+                    <tbody style="display: block; overflow-y: scroll; height: 200px">
+                    {% for post in figure_list %}
+                        {% if post.importance == False and post.urgency == False %}
+                            <tr>
+                                <td style="width: auto; border: none">{{ post.task }}</td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </td>
+            <td>
+                <table class="table" style="border-collapse: collapse;">
+                    <thead class="thead-light">
+                    <tr>
+                        <th style="width: auto">誰かに任せる</th>
+                    </tr>
+                    </thead>
+                    <tbody style="display: block; overflow-y: scroll; height: 200px">
+                    {% for post in figure_list %}
+                        {% if post.importance == True and post.urgency == False %}
+                            <tr>
+                                <td style="width: auto; border: none">{{ post.task }}</td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </table>
+{% endblock %}

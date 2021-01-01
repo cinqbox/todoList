@@ -64,11 +64,19 @@ def AllDelete(request):
     return redirect('posts:index')
 
 
+class FigureList(ListView):
+    template_name = 'posts/posts_figurelist.html'
+    queryset = Posts.objects.order_by('-deadline')
+    context_object_name = 'figure_list'
+    model = Posts
+
+
 write = Create.as_view()
 detail = TaskDetail.as_view()
 index = TaskList.as_view()
 update = Update.as_view()
 delete = Delete.as_view()
+figure = FigureList.as_view()
 
 # class IndexView(View):
 #     def get(self, request, *args, **kwargs):
