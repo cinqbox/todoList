@@ -2,25 +2,25 @@
 {% load static %}
 
 {% block title %}タスク図解{% endblock %}
-{% block extrahead %}
-    <link href="{% static 'figure.css' %}" rel="stylesheet">
-{% endblock %}
-
 
 {% block content %}
     <h4 class="mt-4 border-bottom">タスク図解</h4>
-    <table class="table table-bordered">
-        <tr>
-            <td>
-                <div class="task">
-                    <table class="table" style="border-collapse: collapse;">
-                        <thead class="thead-light">
-                        <tr>
-                            <th style="width: auto">誰かに任せる</th>
-                        </tr>
-                        </thead>
-                        <tbody style="display: block; overflow-y: scroll; height: 200px">
-                        {% for post in figure_list %}
+    <h4 style="text-align: center; color: red"><b>緊急度高</b></h4>
+    <div class="parent">
+        <div class="inline-block"><h4 style="color: blue"><b>重要度低　</b></h4></div>
+        <div class="inline-block">
+            <table class="table table-bordered">
+                <tr>
+                    <td>
+                        <div class="task">
+                            <table class="table" style="border-collapse: collapse;">
+                                <thead class="thead-light">
+                                <tr>
+                                    <th width="400">誰かに任せる</th>
+                                </tr>
+                                </thead>
+                                <tbody style="display: block; overflow-y: scroll; height: 200px">
+                                {% for post in figure_list %}
                             {% if post.importance == False and post.urgency == True %}
                                 <tr>
                                     <td style="width: auto; border: none">
@@ -29,19 +29,19 @@
                                 </tr>
                             {% endif %}
                         {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            </td>
-            <td>
-                <table class="table" style="border-collapse: collapse;">
-                    <thead class="thead-light">
-                    <tr>
-                        <th style="width: auto">すぐにやる　　　</th>
-                    </tr>
-                    </thead>
-                    <tbody style="display: block; overflow-y: scroll; height: 200px">
-                    {% for post in figure_list %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </td>
+                    <td>
+                        <table class="table" style="border-collapse: collapse;">
+                            <thead class="thead-light">
+                            <tr>
+                                <th width="400">すぐにやる</th>
+                            </tr>
+                            </thead>
+                            <tbody style="display: block; overflow-y: scroll; height: 200px">
+                            {% for post in figure_list %}
                         {% if post.importance == True and post.urgency == True %}
                             <tr>
                                 <td style="width: auto; border: none">
@@ -79,7 +79,7 @@
                 <table class="table" style="border-collapse: collapse;">
                     <thead class="thead-light">
                     <tr>
-                        <th style="width: auto">いつやるか決める　　　</th>
+                        <th style="width: auto">いつやるか決める</th>
                     </tr>
                     </thead>
                     <tbody style="display: block; overflow-y: scroll; height: 200px">
@@ -96,5 +96,9 @@
                 </table>
             </td>
         </tr>
-    </table>
+            </table>
+        </div>
+        <div class="inline-block"><h4 style="color: red"><b>　重要度高</b></h4></div>
+    </div>
+    <h4 style="text-align: center; color: blue;"><b>緊急度低</b></h4>
 {% endblock %}
