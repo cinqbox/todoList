@@ -6,3 +6,7 @@
 .parent {
     text-align: center;
 }
+
+.table {
+    height: 300px;
+}
