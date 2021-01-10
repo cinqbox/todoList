@@ -15,6 +15,5 @@ djangorestframework 3.12.2
 python manage.py runserver
 ```
 
-
-![タスク一覧画面]
-(https://user-images.githubusercontent.com/63179941/104113351-39ee6500-533c-11eb-9e91-2693b4ac61cf.png)
+タスク一覧画面
+![image](https://user-images.githubusercontent.com/63179941/104113351-39ee6500-533c-11eb-9e91-2693b4ac61cf.png)
