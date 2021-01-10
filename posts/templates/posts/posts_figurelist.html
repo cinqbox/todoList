@@ -13,13 +13,13 @@
                 <tr>
                     <td>
                         <div class="task">
-                            <table class="table" style="border-collapse: collapse;">
+                            <table class="table" style="border-collapse: collapse; height: auto">
                                 <thead class="thead-light">
                                 <tr>
                                     <th width="400">誰かに任せる</th>
                                 </tr>
                                 </thead>
-                                <tbody style="display: block; overflow-y: scroll; height: 150px">
+                                <tbody style="display: block; overflow-y: scroll; height: 150px; text-align: left">
                                 {% for post in figure_list %}
                             {% if post.importance == False and post.urgency == True %}
                                 <tr>
@@ -34,13 +34,13 @@
                         </div>
                     </td>
                     <td>
-                        <table class="table" style="border-collapse: collapse;">
+                        <table class="table" style="border-collapse: collapse; height: auto">
                             <thead class="thead-light">
                             <tr>
                                 <th width="400">すぐにやる</th>
                             </tr>
                             </thead>
-                            <tbody style="display: block; overflow-y: scroll; height: 150px">
+                            <tbody style="display: block; overflow-y: scroll; height: 150px; text-align: left">
                             {% for post in figure_list %}
                         {% if post.importance == True and post.urgency == True %}
                             <tr>
@@ -50,19 +50,19 @@
                             </tr>
                         {% endif %}
                     {% endfor %}
-                    </tbody>
-                </table>
+                            </tbody>
+                        </table>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <table class="table" style="border-collapse: collapse;">
+                        <table class="table" style="border-collapse: collapse; height: auto">
                             <thead class="thead-light">
                             <tr>
                                 <th style="width: auto">後でやる</th>
                             </tr>
                             </thead>
-                            <tbody style="display: block; overflow-y: scroll; height: 150px">
+                            <tbody style="display: block; overflow-y: scroll; height: 150px; text-align: left">
                             {% for post in figure_list %}
                         {% if post.importance == False and post.urgency == False %}
                             <tr>
@@ -76,13 +76,13 @@
                         </table>
                     </td>
                     <td>
-                        <table class="table" style="border-collapse: collapse;">
+                        <table class="table" style="border-collapse: collapse; height: auto">
                             <thead class="thead-light">
                             <tr>
                                 <th style="width: auto">いつやるか決める</th>
                             </tr>
                             </thead>
-                            <tbody style="display: block; overflow-y: scroll; height: 150px">
+                            <tbody style="display: block; overflow-y: scroll; height: 150px; text-align: left">
                             {% for post in figure_list %}
                         {% if post.importance == True and post.urgency == False %}
                             <tr>
