@@ -14,3 +14,6 @@ djangorestframework 3.12.2
 ```
 python manage.py runserver
 ```
+
+タスク一覧画面
+https://user-images.githubusercontent.com/63179941/104113319-d82dfb00-533b-11eb-886e-437527cc3c44.png
